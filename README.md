@@ -16,11 +16,27 @@ In Phase 2 it enumerates every unique asset pair using `itertools.combinations`,
 <p align="center">
   <img width="2878" height="1726" alt="2" src="https://github.com/user-attachments/assets/0049771a-0561-4cc9-9213-91dd30c1fc0e" />
   <br>
-  <em><b>Figure 2.</b> Residual (spread) time series for a selected tradable pair, with equilibrium level shown as a dashed line..</em>
+  <em><b>Figure 2.</b> Residual (spread) time series for a qualified tradable pair, with equilibrium level shown as a dashed line..</em>
 </p>
 
 <br>
 
-Phase 3 searches for the best entry distance from equilibrium for every tradable pair. It first finds each pair’s maximum absolute deviation from equilibrium, then builds a grid of candidate deviation thresholds from 0 up to that maximum using `deviation_range_intervals = 100`. For every threshold it counts how often the residual breaches the upper band (equilibrium + deviation) or the lower band (equilibrium − deviation), converts those counts into a per side frequency, and plugs that into a profit proxy shaped like `profit = 2 * T * deviation * frequency²`, where `T` is the 90 period window. Because raw breach frequencies can be noisy and not strictly decreasing as the deviation widens, it enforces a strictly decreasing curve by keeping only decreasing points and interpolating back onto the full grid, then applies Tikhonov style smoothing (a second order difference penalty with `regularisation_lambda = 10`). The script recomputes the profit proxy on the smoothed frequencies and chooses the deviation level that maximises it, producing an optimal upper band and lower band around each pair’s equilibrium.
+Phase 3 searches for the best entry distance from equilibrium for every tradable pair. It first finds each pair’s maximum absolute deviation from equilibrium, then builds a grid of candidate deviation thresholds from 0 up to that maximum using `deviation_range_intervals = 100`. For every threshold it counts how often the residual breaches the upper band (equilibrium + deviation) or the lower band (equilibrium − deviation), converts those counts into a per side frequency, and plugs that into a profit proxy shaped like `profit = 2 * T * deviation * frequency²`, where `T` is the 90 period window. Because raw breach frequencies can be noisy and not strictly decreasing as the deviation widens, it enforces a strictly decreasing curve by keeping only decreasing points and interpolating back onto the full grid, then applies Tikhonov style smoothing (a second order difference penalty with `regularisation_lambda = 10`). The script recomputes the profit function on the smoothed frequencies and chooses the deviation level that maximises it, producing an optimal upper band and lower band around each pair’s equilibrium.
+
+<p align="center">
+  <img width="2878" height="1724" alt="3" src="https://github.com/user-attachments/assets/73ca2478-d74b-413b-abd3-82a32529d0f2" />
+  <br>
+  <em><b>Figure 3.</b> Deviation frequency curves for qualified tradable pair, showing the original estimate versus the regularised frequency profile across deviation levels..</em>
+</p>
+
+<br>
+
+<p align="center">
+  <img width="2878" height="1724" alt="4" src="https://github.com/user-attachments/assets/be0df312-27a7-463f-a9b9-1e14718ecebf" />
+  <br>
+  <em><b>Figure 4.</b> Profit value versus deviation threshold for qualified tradable pair, comparing raw profit curve with regularised profit profile used to stabilise band selection..</em>
+</p>
+
+<br>
 
 In Phase 4 it runs an event driven backtest across 90 steps while maintaining two dictionaries of open positions: one for “long spread” trades and one for “short spread” trades. A long spread trade opens when the residual drops below the optimised lower band, and closes when it mean reverts back to equilibrium or higher. A short spread trade opens when the residual rises above the optimised upper band, and closes when it falls back to equilibrium or lower. Returns are computed in log space, using a hedge ratio based on the absolute cointegration coefficient so one leg is scaled against the other (long spread returns combine a long in one asset and a scaled short in the other, and vice versa for short spread). It also implements a simple stop loss based on time: if a trade has not reverted within `reversion_time_multiplier * average_reversion_time` (with `reversion_time_multiplier = 2`), it is forcibly closed, recorded as a stop loss event, and the pair is put in a “sin bin” that blocks immediate re entry until the residual crosses back through equilibrium. After looping, it computes a per pair Sharpe style score from the sequence of incremental trade returns using `rf = 0.03`, ranks pairs by that score, and prints the top `number_of_pairs_selected_from_backtest = 5` along with their cumulative return. Finally, it defines a set of plotting utilities to visualise residuals with equilibrium lines, deviation frequency curves before and after smoothing, profit curves, optimised entry bands, and backtest entry and exit markers on both residual plots and side by side raw price charts, plus a short disclaimer block noting that fees and slippage are assumed zero and that only the long/short market neutral style is considered tradable in this version.
