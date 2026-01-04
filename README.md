@@ -1,11 +1,11 @@
 # Statistical Arbitrage Pairs Trading Model v1.4 Description
 This script is a four phase statistical arbitrage pairs trading pipeline that takes a matrix of historical prices from `price_data.txt` and turns it into a ranked list of “tradable” pairs with backtested trade signals and visual diagnostics. In Phase 1 it loads the raw price matrix (rows are time, columns are assets), then derives log prices and simple log returns (first differences of log prices). 
 
+<figure>
 <img width="2878" height="1726" alt="1" src="https://github.com/user-attachments/assets/ba9d7335-1056-439c-8fd2-a6e5afefe63d" />
-Figure 1. Raw price time series
+<figcaption><b>Figure 1.</b> Raw price data for the universe. </figcaption>
+</figure>
 
-
-   
 It defines helper split functions and prints the resulting shapes, but the core “relevant” dataset it uses for modelling is a fixed window of `data_relevance_period = 90` observations. That 90 period window is what drives the cointegration fitting, the signal threshold optimisation, and the backtest loop length.
 
 In Phase 2 it enumerates every unique asset pair using `itertools.combinations`, then runs an OLS regression in both directions for each pair (A ~ B and B ~ A). For each candidate pair it keeps the direction with the larger absolute slope, treating that slope as the pair’s “cointegration coefficient” and returning an ordered pair (independent, dependent). Using that ordered pair and coefficient, it constructs a residual or “spread” series for each pair as `residual = price_dependent − coefficient * price_independent` (it does not subtract the regression intercept, so the residual is a simplified spread). It then defines the equilibrium level for each spread as its mean, and estimates mean reversion behaviour by counting sign changes of the residual around equilibrium, producing both a crossing frequency and an implied average reversion time in time steps. A pair is deemed tradable only if it clears two filters: reversion frequency above `reversion_frequency_threshold = 0.2`, and a positive cointegration coefficient (so the model stays in the “market neutral long one, short the other” framing used later).
