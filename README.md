@@ -39,4 +39,12 @@ Phase 3 searches for the best entry distance from equilibrium for every tradable
 
 <br>
 
+<p align="center">
+  <img width="2880" height="1726" alt="5" src="https://github.com/user-attachments/assets/1bf50487-4475-464c-ace4-8d18db8882d3" />
+  <br>
+  <em><b>Figure 5.</b> Residual (spread) series for qualified tradable pair with optimised upper and lower deviation bands used to generate trade entry and exit signals..</em>
+</p>
+
+<br>
+
 In Phase 4 it runs an event driven backtest across 90 steps while maintaining two dictionaries of open positions: one for “long spread” trades and one for “short spread” trades. A long spread trade opens when the residual drops below the optimised lower band, and closes when it mean reverts back to equilibrium or higher. A short spread trade opens when the residual rises above the optimised upper band, and closes when it falls back to equilibrium or lower. Returns are computed in log space, using a hedge ratio based on the absolute cointegration coefficient so one leg is scaled against the other (long spread returns combine a long in one asset and a scaled short in the other, and vice versa for short spread). It also implements a simple stop loss based on time: if a trade has not reverted within `reversion_time_multiplier * average_reversion_time` (with `reversion_time_multiplier = 2`), it is forcibly closed, recorded as a stop loss event, and the pair is put in a “sin bin” that blocks immediate re entry until the residual crosses back through equilibrium. After looping, it computes a per pair Sharpe style score from the sequence of incremental trade returns using `rf = 0.03`, ranks pairs by that score, and prints the top `number_of_pairs_selected_from_backtest = 5` along with their cumulative return. Finally, it defines a set of plotting utilities to visualise residuals with equilibrium lines, deviation frequency curves before and after smoothing, profit curves, optimised entry bands, and backtest entry and exit markers on both residual plots and side by side raw price charts, plus a short disclaimer block noting that fees and slippage are assumed zero and that only the long/short market neutral style is considered tradable in this version.
