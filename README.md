@@ -14,7 +14,7 @@ It defines helper split functions and prints the resulting shapes, but the core 
 In Phase 2 it enumerates every unique asset pair using `itertools.combinations`, then runs an OLS regression in both directions for each pair (A ~ B and B ~ A). For each candidate pair it keeps the direction with the larger absolute slope, treating that slope as the pair’s “cointegration coefficient” and returning an ordered pair (independent, dependent). Using that ordered pair and coefficient, it constructs a residual or “spread” series for each pair as `residual = price_dependent − coefficient * price_independent`. It then defines the equilibrium level for each spread as its mean, and estimates mean reversion behaviour by counting sign changes of the residual around equilibrium, producing both a crossing frequency and an implied average reversion time in time steps. A pair is deemed tradable only if it clears two filters: reversion frequency above `reversion_frequency_threshold = 0.2`, and a positive cointegration coefficient (so the model stays in the “market neutral long one, short the other” framing used later).
 
 <p align="center">
-  <img width="2878" height="1726" alt="2" src="https://github.com/user-attachments/assets/0049771a-0561-4cc9-9213-91dd30c1fc0e" />
+  <img width="2876" height="1724" alt="2 1" src="https://github.com/user-attachments/assets/059d7b6f-e6cb-4612-917e-797801cb62a5" />
   <br>
   <em><b>Figure 2.</b> Residual (spread) time series for a qualified tradable pair, with equilibrium level shown as a dashed line..</em>
 </p>
@@ -24,7 +24,7 @@ In Phase 2 it enumerates every unique asset pair using `itertools.combinations`,
 Phase 3 searches for the best entry distance from equilibrium for every tradable pair. It first finds each pair’s maximum absolute deviation from equilibrium, then builds a grid of candidate deviation thresholds from 0 up to that maximum using `deviation_range_intervals = 100`. For every threshold it counts how often the residual breaches the upper band (equilibrium + deviation) or the lower band (equilibrium − deviation), converts those counts into a per side frequency, and plugs that into a profit proxy shaped like `profit = 2 * T * deviation * frequency²`, where `T` is the 90 period window. Because raw breach frequencies can be noisy and not strictly decreasing as the deviation widens, it enforces a strictly decreasing curve by keeping only decreasing points and interpolating back onto the full grid, then applies Tikhonov style smoothing (a second order difference penalty with `regularisation_lambda = 10`). The script recomputes the profit function on the smoothed frequencies and chooses the deviation level that maximises it, producing an optimal upper band and lower band around each pair’s equilibrium.
 
 <p align="center">
-  <img width="2878" height="1724" alt="3" src="https://github.com/user-attachments/assets/73ca2478-d74b-413b-abd3-82a32529d0f2" />
+  <img width="2878" height="1726" alt="3 1" src="https://github.com/user-attachments/assets/e84924f6-05d8-49fc-8302-63c5b86460dd" />
   <br>
   <em><b>Figure 3.</b> Deviation frequency curves for a qualified tradable pair, showing the original estimate versus the regularised frequency profile across deviation levels..</em>
 </p>
@@ -32,7 +32,7 @@ Phase 3 searches for the best entry distance from equilibrium for every tradable
 <br>
 
 <p align="center">
-  <img width="2878" height="1724" alt="4" src="https://github.com/user-attachments/assets/be0df312-27a7-463f-a9b9-1e14718ecebf" />
+  <img width="2876" height="1726" alt="4 1" src="https://github.com/user-attachments/assets/38fb6049-1e16-4347-82fa-965ed90bc2f3" />
   <br>
   <em><b>Figure 4.</b> Profit value versus deviation threshold for a qualified tradable pair, comparing raw profit curve with regularised profit profile used to stabilise band selection..</em>
 </p>
@@ -40,7 +40,7 @@ Phase 3 searches for the best entry distance from equilibrium for every tradable
 <br>
 
 <p align="center">
-  <img width="2880" height="1726" alt="5" src="https://github.com/user-attachments/assets/1bf50487-4475-464c-ace4-8d18db8882d3" />
+  <img width="2878" height="1726" alt="5 1" src="https://github.com/user-attachments/assets/017ce266-3bb4-4076-8275-890f401d6035" />
   <br>
   <em><b>Figure 5.</b> Residual (spread) series for a qualified tradable pair with optimised upper and lower deviation bands used to generate trade entry and exit signals..</em>
 </p>
