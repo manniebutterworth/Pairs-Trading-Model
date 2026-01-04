@@ -14,7 +14,7 @@ It defines helper split functions and prints the resulting shapes, but the core 
 In Phase 2 it enumerates every unique asset pair using `itertools.combinations`, then runs an OLS regression in both directions for each pair (A ~ B and B ~ A). For each candidate pair it keeps the direction with the larger absolute slope, treating that slope as the pair’s “cointegration coefficient” and returning an ordered pair (independent, dependent). Using that ordered pair and coefficient, it constructs a residual or “spread” series for each pair as `residual = price_dependent − coefficient * price_independent`. It then defines the equilibrium level for each spread as its mean, and estimates mean reversion behaviour by counting sign changes of the residual around equilibrium, producing both a crossing frequency and an implied average reversion time in time steps. A pair is deemed tradable only if it clears two filters: reversion frequency above `reversion_frequency_threshold = 0.2`, and a positive cointegration coefficient (so the model stays in the “market neutral long one, short the other” framing used later).
 
 <p align="center">
-  <img width="2878" height="1726" alt="2" src="https://github.com/user-attachments/assets/f5e2cbdb-f2ae-49a0-9182-2eef5985b7f9" />
+  <img width="2878" height="1726" alt="2" src="https://github.com/user-attachments/assets/0049771a-0561-4cc9-9213-91dd30c1fc0e" />
   <br>
   <em><b>Figure 2.</b> Residual (spread) time series for a selected tradable pair, with equilibrium level shown as a dashed line..</em>
 </p>
