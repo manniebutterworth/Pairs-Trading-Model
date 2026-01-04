@@ -5,6 +5,7 @@ This script is a four phase statistical arbitrage pairs trading pipeline that ta
 <img width="2878" height="1726" alt="1" src="https://github.com/user-attachments/assets/ba9d7335-1056-439c-8fd2-a6e5afefe63d" />
 <figcaption><b>Figure 1.</b> Raw price data for the universe. </figcaption>
 </figure>
+<br>
 
 It defines helper split functions and prints the resulting shapes, but the core “relevant” dataset it uses for modelling is a fixed window of `data_relevance_period = 90` observations. That 90 period window is what drives the cointegration fitting, the signal threshold optimisation, and the backtest loop length.
 
