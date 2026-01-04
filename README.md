@@ -56,3 +56,11 @@ In Phase 4 it runs an event driven backtest across 90 steps while maintaining tw
 </p>
 
 <br>
+
+<p align="center">
+  <img width="2878" height="1726" alt="7" src="https://github.com/user-attachments/assets/f68a38a5-68a2-4780-9cdc-4e34a90c64c3" />
+  <br>
+  <em><b>Figure 7.</b> Raw price series for a backtested qualified tradable pair, with long and short entry, exit, and stop loss markers overlaid on Asset A and Asset B price charts..</em>
+</p>
+
+<br>
