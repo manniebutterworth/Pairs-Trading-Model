@@ -1,11 +1,13 @@
 # Statistical Arbitrage Pairs Trading Model v1.4 Description
 This script is a four phase statistical arbitrage pairs trading pipeline that takes a matrix of historical prices from `price_data.txt` and turns it into a ranked list of “tradable” pairs with backtested trade signals and visual diagnostics. In Phase 1 it loads the raw price matrix (rows are time, columns are assets), then derives log prices and simple log returns (first differences of log prices). 
 
-<figure>
-<img width="2878" height="1726" alt="1" src="https://github.com/user-attachments/assets/ba9d7335-1056-439c-8fd2-a6e5afefe63d" />
-<figcaption><b>Figure 1.</b> Raw price data for the universe. </figcaption>
-</figure>
-<br>
+<p align="center">
+  <img width="2878" height="1726" alt="1" src="https://github.com/user-attachments/assets/ba9d7335-1056-439c-8fd2-a6e5afefe63d" />
+  <br>
+  <em><b>Figure 1.</b> Raw price data for the tradable universe.</em>
+</p>
+
+<br><br>
 
 It defines helper split functions and prints the resulting shapes, but the core “relevant” dataset it uses for modelling is a fixed window of `data_relevance_period = 90` observations. That 90 period window is what drives the cointegration fitting, the signal threshold optimisation, and the backtest loop length.
 
