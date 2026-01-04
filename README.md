@@ -26,7 +26,7 @@ Phase 3 searches for the best entry distance from equilibrium for every tradable
 <p align="center">
   <img width="2878" height="1724" alt="3" src="https://github.com/user-attachments/assets/73ca2478-d74b-413b-abd3-82a32529d0f2" />
   <br>
-  <em><b>Figure 3.</b> Deviation frequency curves for qualified tradable pair, showing the original estimate versus the regularised frequency profile across deviation levels..</em>
+  <em><b>Figure 3.</b> Deviation frequency curves for a qualified tradable pair, showing the original estimate versus the regularised frequency profile across deviation levels..</em>
 </p>
 
 <br>
@@ -34,7 +34,7 @@ Phase 3 searches for the best entry distance from equilibrium for every tradable
 <p align="center">
   <img width="2878" height="1724" alt="4" src="https://github.com/user-attachments/assets/be0df312-27a7-463f-a9b9-1e14718ecebf" />
   <br>
-  <em><b>Figure 4.</b> Profit value versus deviation threshold for qualified tradable pair, comparing raw profit curve with regularised profit profile used to stabilise band selection..</em>
+  <em><b>Figure 4.</b> Profit value versus deviation threshold for a qualified tradable pair, comparing raw profit curve with regularised profit profile used to stabilise band selection..</em>
 </p>
 
 <br>
@@ -42,7 +42,7 @@ Phase 3 searches for the best entry distance from equilibrium for every tradable
 <p align="center">
   <img width="2880" height="1726" alt="5" src="https://github.com/user-attachments/assets/1bf50487-4475-464c-ace4-8d18db8882d3" />
   <br>
-  <em><b>Figure 5.</b> Residual (spread) series for qualified tradable pair with optimised upper and lower deviation bands used to generate trade entry and exit signals..</em>
+  <em><b>Figure 5.</b> Residual (spread) series for a qualified tradable pair with optimised upper and lower deviation bands used to generate trade entry and exit signals..</em>
 </p>
 
 <br>
