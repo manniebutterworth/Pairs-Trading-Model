@@ -10,7 +10,7 @@ It then defines the equilibrium level for each spread as its mean, and estimates
 <p align="center">
   <img width="2876" height="1724" alt="2 1" src="https://github.com/user-attachments/assets/059d7b6f-e6cb-4612-917e-797801cb62a5" />
   <br>
-  <em><b>Figure 2.</b> Residual (spread) time series for a qualified tradable pair, with equilibrium level shown as a dashed line..</em>
+  <em><b>Figure 1.</b> Residual (spread) time series for a qualified tradable pair, with equilibrium level shown as a dashed line.</em>
 </p>
 
 <br>
@@ -22,7 +22,7 @@ Because raw breach frequencies can be noisy and not strictly decreasing as the d
 <p align="center">
   <img width="2878" height="1726" alt="3 1" src="https://github.com/user-attachments/assets/e84924f6-05d8-49fc-8302-63c5b86460dd" />
   <br>
-  <em><b>Figure 3.</b> Deviation frequency curves for a qualified tradable pair, showing the original estimate versus the regularised frequency profile across deviation levels..</em>
+  <em><b>Figure 2.</b> Deviation frequency curves for a qualified tradable pair, showing the original estimate versus the regularised frequency profile across deviation levels.</em>
 </p>
 
 <br>
@@ -30,7 +30,7 @@ Because raw breach frequencies can be noisy and not strictly decreasing as the d
 <p align="center">
   <img width="2876" height="1726" alt="4 1" src="https://github.com/user-attachments/assets/38fb6049-1e16-4347-82fa-965ed90bc2f3" />
   <br>
-  <em><b>Figure 4.</b> Profit value versus deviation threshold for a qualified tradable pair, comparing raw profit curve with regularised profit profile used to stabilise band selection..</em>
+  <em><b>Figure 3.</b> Profit value versus deviation threshold for a qualified tradable pair, comparing raw profit curve with regularised profit profile used to stabilise band selection.</em>
 </p>
 
 <br>
@@ -38,7 +38,7 @@ Because raw breach frequencies can be noisy and not strictly decreasing as the d
 <p align="center">
   <img width="2878" height="1726" alt="5 1" src="https://github.com/user-attachments/assets/017ce266-3bb4-4076-8275-890f401d6035" />
   <br>
-  <em><b>Figure 5.</b> Residual (spread) series for a qualified tradable pair with optimised upper and lower deviation bands used to generate trade entry and exit signals..</em>
+  <em><b>Figure 4.</b> Residual (spread) series for a qualified tradable pair with optimised upper and lower deviation bands used to generate trade entry and exit signals.</em>
 </p>
 
 <br>
@@ -52,7 +52,7 @@ Finally, it defines a set of plotting utilities to visualise residuals with equi
 <p align="center">
   <img width="2878" height="1726" alt="6" src="https://github.com/user-attachments/assets/601384d0-ee48-4201-a2b3-992986a3bed4" />
   <br>
-  <em><b>Figure 6.</b> Backtested residual chart for a qualified tradable pair, showing equilibrium and deviation bands with annotated trade events (long and short entries, exits, and stop losses) alongside key performance metrics (Sharpe, period return, and cointegration coefficient)..</em>
+  <em><b>Figure 5.</b> Backtested residual chart for a qualified tradable pair, showing equilibrium and deviation bands with annotated trade events (long and short entries, exits, and stop losses) alongside key performance metrics (Sharpe, period return, and cointegration coefficient).</em>
 </p>
 
 <br>
@@ -60,7 +60,7 @@ Finally, it defines a set of plotting utilities to visualise residuals with equi
 <p align="center">
   <img width="2878" height="1726" alt="7" src="https://github.com/user-attachments/assets/f68a38a5-68a2-4780-9cdc-4e34a90c64c3" />
   <br>
-  <em><b>Figure 7.</b> Raw price series for a backtested qualified tradable pair, with long and short entry, exit, and stop loss markers overlaid on Asset A and Asset B price charts..</em>
+  <em><b>Figure 6.</b> Raw price series for a backtested qualified tradable pair, with long and short entry, exit, and stop loss markers overlaid on Asset A and Asset B price charts.</em>
 </p>
 
 <br>
